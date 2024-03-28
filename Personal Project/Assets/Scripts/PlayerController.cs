@@ -18,9 +18,11 @@ public class PlayerController : MonoBehaviour
     {// player movement
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
+        
         // calling a work function and passing the user input information and speed value
         LocalMove(horizontal, vertical, speed);
-       // calling a movement limiter  
+       
+        // calling a movement limiter  
         playerCamLimit();
     }
     // movement calculation (X-axis, Y-axis, speed)
@@ -35,6 +37,20 @@ public class PlayerController : MonoBehaviour
         pos.x = Mathf.Clamp01(pos.x);
         pos.y = Mathf.Clamp01(pos.y);
         transform.position = Camera.main.ViewportToWorldPoint(pos);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Enemy crashes into Player");
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Powerup"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
 //Player should move Up/Down/Left/Right
