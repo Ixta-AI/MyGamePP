@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.localPosition += new Vector3(x, y, 0) * speed * Time.deltaTime;
     }
+
    // locking player into camera boundaries
     void playerCamLimit()
     {
